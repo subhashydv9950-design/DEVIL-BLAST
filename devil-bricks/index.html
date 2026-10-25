@@ -1,0 +1,148 @@
+
+<!-- =====================================================
+     DEVIL GAMES
+     PART 11: DEVIL BRICKS — HTML
+     FILE: devil-bricks/index.html
+     NEXT: PART 12 — devil-bricks/style.css
+===================================================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#10101c">
+  <meta name="description" content="DEVIL BRICKS — a colorful arcade brick breaker game.">
+  <title>DEVIL BRICKS | DEVIL GAMES</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="brick-app">
+
+    <header class="brick-header">
+      <a class="brick-home-btn" href="../index.html" aria-label="Back to games">
+        <span aria-hidden="true">⌂</span>
+      </a>
+
+      <div class="brick-brand">
+        <span class="brick-brand-icon">◆</span>
+        <div>
+          <h1>DEVIL <span>BRICKS</span></h1>
+          <p>ARCADE BREAKER</p>
+        </div>
+      </div>
+
+      <button id="brickPauseBtn" class="brick-icon-btn"
+        type="button" aria-label="Pause game">Ⅱ</button>
+    </header>
+
+    <section class="brick-stats" aria-label="Game statistics">
+      <div class="brick-stat">
+        <span>SCORE</span>
+        <strong id="brickScoreValue">0</strong>
+      </div>
+      <div class="brick-stat">
+        <span>BEST</span>
+        <strong id="brickBestValue">0</strong>
+      </div>
+      <div class="brick-stat">
+        <span>LIVES</span>
+        <strong id="brickLivesValue">3</strong>
+      </div>
+    </section>
+
+    <section class="brick-game-shell">
+      <div class="brick-canvas-wrap">
+        <canvas id="brickCanvas"
+          aria-label="Brick breaker game area"
+          role="img"></canvas>
+
+        <div id="brickStartOverlay" class="brick-overlay">
+          <div class="brick-overlay-card">
+            <div class="brick-large-icon">🧱</div>
+            <p class="brick-eyebrow">READY PLAYER?</p>
+            <h2>BREAK THE BRICKS!</h2>
+            <p>Move the paddle, bounce the ball and clear every brick.</p>
+            <button id="brickStartBtn" class="brick-primary-btn" type="button">
+              <span>▶</span> START GAME
+            </button>
+          </div>
+        </div>
+
+        <div id="brickPauseOverlay" class="brick-overlay" hidden>
+          <div class="brick-overlay-card">
+            <div class="brick-large-icon">Ⅱ</div>
+            <p class="brick-eyebrow">GAME PAUSED</p>
+            <h2>TAKE A BREAK</h2>
+            <button id="brickResumeBtn" class="brick-primary-btn" type="button">
+              ▶ RESUME
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p id="brickMessage" class="brick-message" aria-live="polite">
+        Tap START GAME to begin.
+      </p>
+    </section>
+
+    <section class="brick-controls" aria-label="Game controls">
+      <button id="moveLeftBtn" class="brick-control-btn" type="button"
+        aria-label="Move paddle left">◀</button>
+
+      <button id="launchBtn" class="brick-launch-btn" type="button">
+        LAUNCH BALL
+      </button>
+
+      <button id="moveRightBtn" class="brick-control-btn" type="button"
+        aria-label="Move paddle right">▶</button>
+    </section>
+
+    <section class="brick-actions">
+      <button id="brickSoundBtn" class="brick-secondary-btn" type="button">
+        🔊 SOUND ON
+      </button>
+      <button id="brickRestartBtn" class="brick-secondary-btn" type="button">
+        ↻ RESTART
+      </button>
+    </section>
+
+    <p class="brick-tip">
+      TIP: Use the left and right buttons or drag across the game area.
+    </p>
+
+    <footer class="brick-footer">
+      <span>DEVIL GAMES</span>
+      <span>•</span>
+      <span>ARCADE SERIES</span>
+    </footer>
+  </main>
+
+  <div id="brickGameOverModal" class="brick-modal" hidden>
+    <div class="brick-modal-card">
+      <div id="brickResultIcon" class="brick-large-icon">🏆</div>
+      <p class="brick-eyebrow">ROUND COMPLETE</p>
+      <h2 id="brickResultTitle">GAME OVER</h2>
+
+      <div class="brick-final-score">
+        <span>YOUR SCORE</span>
+        <strong id="brickFinalScore">0</strong>
+      </div>
+
+      <button id="brickPlayAgainBtn" class="brick-primary-btn" type="button">
+        ↻ PLAY AGAIN
+      </button>
+
+      <a class="brick-home-link" href="../index.html">
+        ← BACK TO DEVIL GAMES
+      </a>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
+<!-- =====================================================
+     PART 11 END
+     FILE: devil-bricks/index.html
+     NEXT PART 12: devil-bricks/style.css
+===================================================== -->

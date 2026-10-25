@@ -1,0 +1,403 @@
+
+<!-- =====================================================
+ DEVIL GAMES — PART 01 START
+ FILE: index.html
+ PURPOSE: Main Hub HTML Structure
+===================================================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="theme-color" content="#14213d">
+  <meta name="description"
+        content="DEVIL GAMES — Play colorful puzzle and arcade games.">
+
+  <title>DEVIL GAMES | Play Zone</title>
+
+  <!-- Main Hub CSS: PART 02 -->
+  <link rel="stylesheet" href="hub.css">
+
+</head>
+
+<body>
+
+  <!-- APP START -->
+  <div id="app" class="app-shell">
+
+    <!-- HEADER START -->
+    <header class="top-header">
+
+      <button class="icon-btn" id="menuBtn"
+              aria-label="Open menu">
+        ☰
+      </button>
+
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">🎮</span>
+        <span class="brand-name">
+          DEVIL <strong>GAMES</strong>
+        </span>
+      </a>
+
+      <button class="icon-btn" id="settingsBtn"
+              aria-label="Settings">
+        ⚙️
+      </button>
+
+    </header>
+    <!-- HEADER END -->
+
+
+    <!-- MAIN CONTENT START -->
+    <main class="main-content">
+
+      <!-- WELCOME BANNER -->
+      <section class="welcome-banner">
+        <div class="welcome-text">
+          <span class="eyebrow">YOUR GAMING DESTINATION</span>
+
+          <h1>Play. Explore.<br><span>Have Fun!</span></h1>
+
+          <p>
+            Discover colorful puzzles and exciting arcade games.
+          </p>
+
+          <button class="primary-btn" id="exploreBtn">
+            Explore Games <span>→</span>
+          </button>
+        </div>
+
+        <div class="welcome-art" aria-hidden="true">
+          <span class="art-glow"></span>
+          <span class="art-gamepad">🎮</span>
+          <span class="art-star star-one">✦</span>
+          <span class="art-star star-two">✦</span>
+        </div>
+      </section>
+
+
+      <!-- GAME LIBRARY -->
+      <section class="games-section" id="gamesSection">
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">PICK YOUR FAVORITE</span>
+            <h2>All Games</h2>
+          </div>
+
+          <span class="game-count">05 GAMES</span>
+        </div>
+
+
+        <!-- GAME FILTERS -->
+        <nav class="game-filters" aria-label="Game categories">
+          <button class="filter-btn active" data-filter="all">
+            All Games
+          </button>
+
+          <button class="filter-btn" data-filter="puzzle">
+            Puzzle
+          </button>
+
+          <button class="filter-btn" data-filter="arcade">
+            Arcade
+          </button>
+
+          <button class="filter-btn" data-filter="strategy">
+            Strategy
+          </button>
+        </nav>
+
+
+        <!-- GAME CARDS -->
+        <div class="games-grid" id="gamesGrid">
+
+          <!-- GAME 01 -->
+          <article class="game-card"
+                   data-category="puzzle"
+                   data-game="devil-blast">
+
+            <div class="game-cover cover-blast">
+              <span class="cover-badge">FEATURED</span>
+              <div class="cover-art" aria-hidden="true">🧩</div>
+              <span class="cover-decoration">✦</span>
+            </div>
+
+            <div class="game-info">
+              <span class="game-type">BLOCK PUZZLE</span>
+              <h3>DEVIL blast</h3>
+              <p>Place blocks. Clear lines. Beat your best!</p>
+
+              <button class="play-btn"
+                      data-open-game="devil-blast">
+                Play Now <span>→</span>
+              </button>
+            </div>
+          </article>
+
+
+          <!-- GAME 02 -->
+          <article class="game-card"
+                   data-category="arcade"
+                   data-game="devil-run">
+
+            <div class="game-cover cover-run">
+              <div class="cover-art" aria-hidden="true">🏃</div>
+              <span class="cover-decoration">⚡</span>
+            </div>
+
+            <div class="game-info">
+              <span class="game-type">ENDLESS RUNNER</span>
+              <h3>DEVIL RUN</h3>
+              <p>Run farther, dodge obstacles and collect coins.</p>
+
+              <button class="play-btn"
+                      data-open-game="devil-run">
+                Play Now <span>→</span>
+              </button>
+            </div>
+          </article>
+
+
+          <!-- GAME 03 -->
+          <article class="game-card"
+                   data-category="arcade"
+                   data-game="devil-bricks">
+
+            <div class="game-cover cover-bricks">
+              <div class="cover-art" aria-hidden="true">🧱</div>
+              <span class="cover-decoration">✦</span>
+            </div>
+
+            <div class="game-info">
+              <span class="game-type">ARCADE</span>
+              <h3>DEVIL BRICKS</h3>
+              <p>Break bricks, collect power-ups and win levels.</p>
+
+              <button class="play-btn"
+                      data-open-game="devil-bricks">
+                Play Now <span>→</span>
+              </button>
+            </div>
+          </article>
+
+
+          <!-- GAME 04 -->
+          <article class="game-card"
+                   data-category="strategy"
+                   data-game="devil-tic-tac-toe">
+
+            <div class="game-cover cover-tictactoe">
+              <div class="cover-art" aria-hidden="true">⭕</div>
+              <span class="cover-decoration">✕</span>
+            </div>
+
+            <div class="game-info">
+              <span class="game-type">STRATEGY</span>
+              <h3>DEVIL TIC TAC TOE</h3>
+              <p>Challenge the AI or play with a friend.</p>
+
+              <button class="play-btn"
+                      data-open-game="devil-tic-tac-toe">
+                Play Now <span>→</span>
+              </button>
+            </div>
+          </article>
+
+
+          <!-- GAME 05 -->
+          <article class="game-card"
+                   data-category="puzzle"
+                   data-game="devil-match">
+
+            <div class="game-cover cover-match">
+              <div class="cover-art" aria-hidden="true">💎</div>
+              <span class="cover-decoration">✦</span>
+            </div>
+
+            <div class="game-info">
+              <span class="game-type">MATCH-3 PUZZLE</span>
+              <h3>DEVIL MATCH</h3>
+              <p>Match colorful gems and unlock new levels.</p>
+
+              <button class="play-btn"
+                      data-open-game="devil-match">
+                Play Now <span>→</span>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+
+      <!-- ABOUT SECTION -->
+      <section class="about-strip">
+        <div>
+          <span class="eyebrow">MADE FOR GAME LOVERS</span>
+          <h2>One Hub. Endless Fun.</h2>
+          <p>Explore a growing collection of games.</p>
+        </div>
+
+        <button class="secondary-btn" id="aboutBtn">
+          About Us
+        </button>
+      </section>
+
+    </main>
+    <!-- MAIN CONTENT END -->
+
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="bottom-nav-item active" data-nav="home">
+        <span>⌂</span>
+        <small>Home</small>
+      </button>
+
+      <button class="bottom-nav-item" data-nav="games">
+        <span>🎮</span>
+        <small>Games</small>
+      </button>
+
+      <button class="bottom-nav-item" data-nav="settings">
+        <span>⚙</span>
+        <small>Settings</small>
+      </button>
+
+      <button class="bottom-nav-item" data-nav="about">
+        <span>ⓘ</span>
+        <small>About</small>
+      </button>
+    </nav>
+
+
+    <!-- MENU DRAWER -->
+    <div class="overlay" id="menuOverlay" hidden>
+      <aside class="side-drawer" role="dialog"
+             aria-label="Main menu">
+
+        <div class="drawer-heading">
+          <h2>DEVIL GAMES</h2>
+          <button class="icon-btn" id="closeMenuBtn"
+                  aria-label="Close menu">✕</button>
+        </div>
+
+        <button class="drawer-link" data-drawer="home">
+          🏠 &nbsp; Home
+        </button>
+
+        <button class="drawer-link" data-drawer="games">
+          🎮 &nbsp; All Games
+        </button>
+
+        <button class="drawer-link" data-drawer="settings">
+          ⚙️ &nbsp; Settings
+        </button>
+
+        <button class="drawer-link" data-drawer="about">
+          ⓘ &nbsp; About Developer
+        </button>
+
+        <p class="drawer-footer">DEVIL GAMES · GAME HUB</p>
+      </aside>
+    </div>
+
+
+    <!-- ABOUT MODAL -->
+    <div class="modal-overlay" id="aboutModal" hidden>
+      <section class="modal-card" role="dialog"
+               aria-modal="true" aria-labelledby="aboutTitle">
+
+        <button class="modal-close" id="closeAboutBtn"
+                aria-label="Close About">✕</button>
+
+        <div class="modal-icon">🎮</div>
+        <span class="eyebrow">BEHIND THE GAMES</span>
+        <h2 id="aboutTitle">About DEVIL GAMES</h2>
+
+        <p class="about-description">
+          A collection of colorful games made for fun.
+        </p>
+
+        <div class="developer-details">
+          <p><strong>Developer &amp; Founder:</strong></p>
+          <p>Subhash Yadav</p>
+
+          <p><strong>Instagram:</strong></p>
+          <a href="https://www.instagram.com/iamsubhash177/"
+             target="_blank" rel="noopener noreferrer">
+            @iamsubhash177
+          </a>
+
+          <p><strong>Email:</strong></p>
+          <a href="mailto:yahu9950@gmail.com">
+            yahu9950@gmail.com
+          </a>
+        </div>
+
+        <button class="primary-btn" id="aboutDoneBtn">
+          Got It
+        </button>
+      </section>
+    </div>
+
+
+    <!-- SETTINGS MODAL -->
+    <div class="modal-overlay" id="settingsModal" hidden>
+      <section class="modal-card" role="dialog"
+               aria-modal="true" aria-labelledby="settingsTitle">
+
+        <button class="modal-close" id="closeSettingsBtn"
+                aria-label="Close Settings">✕</button>
+
+        <span class="eyebrow">PERSONALIZE YOUR EXPERIENCE</span>
+        <h2 id="settingsTitle">Settings</h2>
+
+        <label class="setting-row">
+          <span>Sound Effects</span>
+          <input type="checkbox" id="soundToggle" checked>
+        </label>
+
+        <label class="setting-row">
+          <span>Background Music</span>
+          <input type="checkbox" id="musicToggle" checked>
+        </label>
+
+        <label class="setting-row">
+          <span>Language</span>
+          <select id="languageSelect">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </label>
+
+        <button class="primary-btn" id="fullscreenBtn">
+          ⛶ Enter Fullscreen
+        </button>
+
+        <button class="secondary-btn" id="closeSettingsDoneBtn">
+          Done
+        </button>
+      </section>
+    </div>
+
+  </div>
+  <!-- APP END -->
+
+
+  <!-- Main Hub JavaScript: PART 03 -->
+  <script src="hub.js"></script>
+
+</body>
+</html>
+
+<!-- =====================================================
+ DEVIL GAMES — PART 01 END
+ NEXT: PART 02 — hub.css
+===================================================== -->
+  

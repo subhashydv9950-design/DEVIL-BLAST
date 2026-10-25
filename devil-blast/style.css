@@ -1,0 +1,669 @@
+
+/* =====================================================
+   DEVIL GAMES — PART 05
+   FILE: devil-blast/style.css
+   PURPOSE: COLORFUL, RESPONSIVE BLOCK PUZZLE DESIGN
+   NEXT: PART 06 — devil-blast/game.js
+===================================================== */
+
+:root {
+  --bg: #100b19;
+  --panel: #1b1428;
+  --panel-light: #251a36;
+  --border: rgba(255, 255, 255, 0.09);
+  --text: #fff8ff;
+  --muted: #a99bb9;
+  --red: #ff365e;
+  --purple: #a65cff;
+  --cyan: #38dcff;
+  --gold: #ffcf58;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  min-height: 100%;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 0%, #39204f 0%, transparent 45%),
+    radial-gradient(ellipse at 100% 65%, #24113b 0%, transparent 35%),
+    var(--bg);
+  overscroll-behavior: none;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.game-shell {
+  width: min(100%, 680px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: max(12px, env(safe-area-inset-top)) 15px
+    max(14px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* TOP HEADER */
+
+.game-header {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  font-size: 25px;
+  transition: transform 0.18s, background 0.18s;
+}
+
+.icon-btn:active {
+  transform: scale(0.92);
+  background: rgba(166, 92, 255, 0.25);
+}
+
+.game-brand {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.brand-mark {
+  color: var(--red);
+  font-size: 29px;
+  text-shadow: 0 0 18px rgba(255, 54, 94, 0.65);
+}
+
+.game-brand h1 {
+  margin: 0;
+  font-size: clamp(17px, 4.7vw, 23px);
+  line-height: 1.1;
+  letter-spacing: 1.5px;
+  font-weight: 950;
+}
+
+.game-brand h1 span {
+  color: #ff5279;
+}
+
+.game-brand p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 3px;
+  font-weight: 800;
+}
+
+/* SCORE CARDS */
+
+.score-panel {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 9px;
+}
+
+.score-box {
+  min-width: 0;
+  padding: 12px 5px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(145deg, #241a35, #171121);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.12);
+}
+
+.score-main {
+  border-color: rgba(166, 92, 255, 0.38);
+  background: linear-gradient(145deg, #392050, #20132f);
+}
+
+.score-label {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.score-box strong {
+  display: block;
+  margin-top: 5px;
+  font-size: clamp(19px, 5vw, 27px);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+/* MESSAGE */
+
+.game-message {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 15px;
+  border: 1px solid rgba(255, 207, 88, 0.18);
+  border-radius: 17px;
+  background: linear-gradient(
+    105deg,
+    rgba(255, 207, 88, 0.09),
+    rgba(166, 92, 255, 0.08)
+  );
+}
+
+.message-icon {
+  width: 39px;
+  height: 39px;
+  flex: 0 0 39px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: rgba(255, 207, 88, 0.13);
+  color: var(--gold);
+  font-size: 22px;
+}
+
+.game-message h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.game-message p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* PUZZLE BOARD */
+
+.board-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.board-frame {
+  width: min(100%, 460px);
+  padding: 7px;
+  border: 1px solid rgba(190, 145, 255, 0.23);
+  border-radius: 16px;
+  background: linear-gradient(145deg, #2a1c3c, #171020);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.24),
+    0 0 28px rgba(166, 92, 255, 0.08);
+}
+
+.puzzle-board {
+  width: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-rows: repeat(8, minmax(0, 1fr));
+  gap: clamp(3px, 0.9vw, 6px);
+  touch-action: manipulation;
+}
+
+.board-cell {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  border-radius: clamp(3px, 1vw, 7px);
+  background: #241b32;
+  transition:
+    background 0.12s,
+    transform 0.12s,
+    box-shadow 0.12s;
+}
+
+.board-cell.filled {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 0.25),
+    inset 0 -3px 4px rgba(0, 0, 0, 0.18),
+    0 2px 4px rgba(0, 0, 0, 0.17);
+}
+
+.board-cell.preview-valid {
+  background: rgba(58, 228, 165, 0.5);
+  border-color: #6bffc8;
+}
+
+.board-cell.preview-invalid {
+  background: rgba(255, 54, 94, 0.48);
+  border-color: #ff7992;
+}
+
+.board-cell.just-cleared {
+  animation: cellBlast 0.3s ease-out;
+}
+
+@keyframes cellBlast {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.45;
+  }
+  55% {
+    transform: scale(1.13);
+    filter: brightness(1.8);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* COLOR CLASSES FOR GAME BLOCKS */
+
+.block-red {
+  background: linear-gradient(145deg, #ff8a9f, #ff315d 52%, #d91d49);
+}
+
+.block-blue {
+  background: linear-gradient(145deg, #8cecff, #31aaff 52%, #1764e6);
+}
+
+.block-green {
+  background: linear-gradient(145deg, #aaffc4, #36e58a 52%, #119a5d);
+}
+
+.block-yellow {
+  background: linear-gradient(145deg, #fff2a4, #ffd447 52%, #e99a16);
+}
+
+.block-purple {
+  background: linear-gradient(145deg, #e0b4ff, #a85cff 52%, #7030d8);
+}
+
+.block-orange {
+  background: linear-gradient(145deg, #ffd0a1, #ff873f 52%, #df4c20);
+}
+
+.block-pink {
+  background: linear-gradient(145deg, #ffc0ef, #ff67c9 52%, #d72d99);
+}
+
+.block-cyan {
+  background: linear-gradient(145deg, #b1ffff, #37e3e9 52%, #1397c4);
+}
+
+/* BLOCK TRAY */
+
+.block-section {
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 19px;
+  background: linear-gradient(145deg, #21172f, #171020);
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+}
+
+.section-heading p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.tray-badge {
+  padding: 7px 9px;
+  border: 1px solid rgba(166, 92, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(166, 92, 255, 0.12);
+  color: #d8b7ff;
+  font-size: 9px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.block-tray {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.block-slot {
+  min-height: 83px;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+  transition:
+    border-color 0.16s,
+    background 0.16s,
+    transform 0.16s;
+}
+
+.block-slot:active {
+  transform: scale(0.96);
+}
+
+.block-slot.selected {
+  border-color: var(--purple);
+  background: rgba(166, 92, 255, 0.16);
+  box-shadow: 0 0 15px rgba(166, 92, 255, 0.12);
+}
+
+.block-slot.empty {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.block-shape {
+  display: grid;
+  gap: 3px;
+  align-content: center;
+  justify-content: center;
+}
+
+.shape-cell {
+  width: clamp(13px, 4vw, 20px);
+  aspect-ratio: 1;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.18);
+}
+
+/* ACTION BUTTONS */
+
+.game-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.action-btn {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 9px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: #21172f;
+  transition: transform 0.15s, filter 0.15s;
+}
+
+.action-btn:active {
+  transform: scale(0.96);
+  filter: brightness(1.2);
+}
+
+.action-btn span {
+  font-size: 20px;
+}
+
+.action-btn small {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+}
+
+.hint-action {
+  border-color: rgba(255, 207, 88, 0.2);
+  background: linear-gradient(135deg, #382b28, #251a2d);
+}
+
+.hint-action span {
+  color: var(--gold);
+}
+
+.restart-action span {
+  color: var(--cyan);
+}
+
+.game-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 2px 3px;
+  color: #756680;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+/* PAUSE AND GAME OVER */
+
+.game-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(7, 4, 12, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.game-modal.hidden {
+  display: none;
+}
+
+.modal-card {
+  width: min(100%, 360px);
+  padding: 27px 22px;
+  text-align: center;
+  border: 1px solid rgba(190, 145, 255, 0.25);
+  border-radius: 25px;
+  background: linear-gradient(145deg, #2b1d3d, #15101f);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+}
+
+.modal-symbol {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  border-radius: 20px;
+  background: rgba(166, 92, 255, 0.16);
+  color: #d4aaff;
+  font-size: 30px;
+}
+
+.modal-card h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.modal-card p {
+  margin: 10px 0 20px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.modal-score {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 18px;
+  padding: 13px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.modal-score.hidden {
+  display: none;
+}
+
+.modal-score span {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.modal-score strong {
+  color: var(--gold);
+  font-size: 30px;
+}
+
+.modal-primary,
+.modal-secondary {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 9px;
+  border-radius: 13px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+}
+
+.modal-primary {
+  border: 0;
+  background: linear-gradient(100deg, #ff365e, #a65cff);
+  color: white;
+}
+
+.modal-secondary {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.modal-home {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 380px) {
+  .game-shell {
+    padding-right: 10px;
+    padding-left: 10px;
+    gap: 11px;
+  }
+
+  .score-box {
+    padding: 10px 3px;
+  }
+
+  .score-label {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .block-section {
+    padding: 10px;
+  }
+
+  .block-slot {
+    min-height: 70px;
+  }
+
+  .action-btn {
+    gap: 5px;
+  }
+
+  .action-btn small {
+    font-size: 8px;
+  }
+}
+
+/* LANDSCAPE MOBILE */
+
+@media (max-height: 720px) and (orientation: landscape) {
+  .game-shell {
+    width: min(100%, 980px);
+    gap: 8px;
+  }
+
+  .game-header {
+    min-height: 42px;
+  }
+
+  .icon-btn {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+
+  .game-message {
+    padding: 8px 12px;
+  }
+
+  .message-icon {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+  }
+
+  .board-frame {
+    width: min(48vh, 420px);
+  }
+
+  .block-slot {
+    min-height: 55px;
+  }
+}
+
+/* =====================================================
+   PART 05 END
+   FILE: devil-blast/style.css
+   NEXT: PART 06 — devil-blast/game.js
+===================================================== */

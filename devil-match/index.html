@@ -1,0 +1,199 @@
+
+<!-- =====================================================
+ DEVIL GAMES
+ PART 17: DEVIL MATCH — MATCH-3 GAME HTML
+ FILE: devil-match/index.html
+ NEXT: PART 18 — devil-match/style.css
+===================================================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101020">
+  <meta name="description" content="DEVIL MATCH - Match colorful gems and beat your best score!">
+  <title>DEVIL MATCH | DEVIL GAMES</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <main class="match-app">
+
+    <!-- TOP BAR -->
+    <header class="match-topbar">
+      <a class="match-home-btn" href="../index.html" aria-label="Back to home">
+        <span>⌂</span> HOME
+      </a>
+
+      <div class="match-brand">
+        <span class="match-brand-icon">💎</span>
+        <div>
+          <h1>DEVIL MATCH</h1>
+          <p>GEM PUZZLE</p>
+        </div>
+      </div>
+
+      <button id="matchSoundBtn" class="match-icon-btn"
+        type="button" aria-label="Toggle sound">🔊</button>
+    </header>
+
+    <!-- GAME INTRO -->
+    <section class="match-intro">
+      <p class="match-eyebrow">MATCH • COMBO • WIN</p>
+      <h2>Match the <span>Gems!</span></h2>
+      <p>Swap gems, create combos, and beat your high score.</p>
+    </section>
+
+    <!-- SCORE PANEL -->
+    <section class="match-stats" aria-label="Game statistics">
+      <div class="match-stat-card">
+        <span>SCORE</span>
+        <strong id="matchScoreValue">0</strong>
+      </div>
+
+      <div class="match-stat-card match-stat-highlight">
+        <span>BEST</span>
+        <strong id="matchBestValue">0</strong>
+      </div>
+
+      <div class="match-stat-card">
+        <span>MOVES</span>
+        <strong id="matchMovesValue">30</strong>
+      </div>
+    </section>
+
+    <!-- GAME AREA -->
+    <section class="match-game-panel">
+      <div class="match-board-heading">
+        <div>
+          <span class="match-live-dot"></span>
+          <span id="matchStatusLabel">READY TO PLAY</span>
+        </div>
+        <button id="matchPauseBtn" class="match-small-btn"
+          type="button">Ⅱ PAUSE</button>
+      </div>
+
+      <div class="match-board-frame">
+        <div id="matchBoard" class="match-board"
+          role="grid" aria-label="Gem matching board">
+          <!-- Gem buttons are created by game.js -->
+        </div>
+
+        <!-- START OVERLAY -->
+        <div id="matchStartOverlay" class="match-overlay">
+          <div class="match-overlay-card">
+            <div class="match-overlay-icon">💎</div>
+            <p class="match-overlay-label">PUZZLE CHALLENGE</p>
+            <h2>Ready to Match?</h2>
+            <p>Match 3 or more gems of the same color.</p>
+            <button id="matchStartBtn" class="match-primary-btn"
+              type="button">▶ START GAME</button>
+          </div>
+        </div>
+
+        <!-- PAUSE OVERLAY -->
+        <div id="matchPauseOverlay" class="match-overlay" hidden>
+          <div class="match-overlay-card">
+            <div class="match-overlay-icon">⏸️</div>
+            <p class="match-overlay-label">GAME PAUSED</p>
+            <h2>Take a Break</h2>
+            <p>Your puzzle is waiting for you.</p>
+            <button id="matchResumeBtn" class="match-primary-btn"
+              type="button">▶ RESUME</button>
+          </div>
+        </div>
+      </div>
+
+      <p id="matchMessage" class="match-message" aria-live="polite">
+        Press START GAME to begin.
+      </p>
+
+      <!-- GAME CONTROLS -->
+      <div class="match-controls">
+        <button id="matchHintBtn" class="match-control-btn"
+          type="button">
+          <span>💡</span>
+          <span>HINT</span>
+        </button>
+
+        <button id="matchRestartBtn" class="match-control-btn"
+          type="button">
+          <span>🔄</span>
+          <span>RESTART</span>
+        </button>
+
+        <button id="matchPauseControlBtn" class="match-control-btn"
+          type="button">
+          <span>⏸️</span>
+          <span>PAUSE</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- HOW TO PLAY -->
+    <section class="match-howto">
+      <h3>🎮 HOW TO PLAY</h3>
+
+      <div class="match-tip-grid">
+        <div class="match-tip">
+          <span>👆</span>
+          <div>
+            <strong>Swap Gems</strong>
+            <p>Tap two neighboring gems or swipe between them.</p>
+          </div>
+        </div>
+
+        <div class="match-tip">
+          <span>✨</span>
+          <div>
+            <strong>Create Combos</strong>
+            <p>Match three or more gems of the same color.</p>
+          </div>
+        </div>
+
+        <div class="match-tip">
+          <span>🏆</span>
+          <div>
+            <strong>Beat Your Best</strong>
+            <p>Earn points before you run out of moves.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAME OVER MODAL -->
+    <div id="matchGameOverModal" class="match-modal" hidden>
+      <div class="match-modal-card">
+        <div id="matchResultIcon" class="match-result-icon">🏆</div>
+        <p class="match-overlay-label">CHALLENGE COMPLETE</p>
+        <h2 id="matchResultTitle">Game Over!</h2>
+        <p class="match-result-description">
+          Your final score is
+        </p>
+        <strong id="matchFinalScore" class="match-final-score">0</strong>
+
+        <button id="matchPlayAgainBtn" class="match-primary-btn"
+          type="button">↻ PLAY AGAIN</button>
+
+        <a href="../index.html" class="match-secondary-btn">
+          ⌂ BACK TO DEVIL GAMES
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="match-footer">
+      <span>DEVIL GAMES</span>
+      <span>DEVIL MATCH · GEM PUZZLE</span>
+    </footer>
+
+  </main>
+</body>
+</html>
+
+<!-- =====================================================
+ PART 17 COMPLETE
+ NEXT PART: PART 18 — devil-match/style.css
+===================================================== -->

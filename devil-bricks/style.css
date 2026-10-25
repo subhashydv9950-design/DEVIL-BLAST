@@ -1,0 +1,566 @@
+
+/* =====================================================
+   DEVIL GAMES
+   PART 12: DEVIL BRICKS — CSS DESIGN
+   FILE: devil-bricks/style.css
+   NEXT: PART 13 — devil-bricks/game.js
+===================================================== */
+
+:root {
+  --brick-bg: #0b0b15;
+  --brick-panel: #151526;
+  --brick-panel-light: #202039;
+  --brick-text: #f8f8ff;
+  --brick-muted: #9696b5;
+  --brick-red: #ff416c;
+  --brick-purple: #a855f7;
+  --brick-cyan: #35e5ff;
+  --brick-border: rgba(255, 255, 255, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  min-height: 100%;
+  background: var(--brick-bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--brick-text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(112, 48, 180, 0.19), transparent 48%),
+    radial-gradient(ellipse at 100% 60%, rgba(255, 65, 108, 0.07), transparent 35%),
+    var(--brick-bg);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--brick-cyan);
+  outline-offset: 4px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.brick-app {
+  width: min(100%, 760px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: max(14px, env(safe-area-inset-top)) 16px
+    max(20px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+/* HEADER */
+
+.brick-header {
+  display: grid;
+  grid-template-columns: 46px 1fr 46px;
+  align-items: center;
+  gap: 12px;
+}
+
+.brick-home-btn,
+.brick-icon-btn {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--brick-border);
+  border-radius: 14px;
+  background: var(--brick-panel);
+  color: white;
+  font-size: 25px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.brick-home-btn:active,
+.brick-icon-btn:active {
+  transform: scale(0.94);
+  background: var(--brick-panel-light);
+}
+
+.brick-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.brick-brand-icon {
+  color: var(--brick-cyan);
+  font-size: 30px;
+  text-shadow: 0 0 18px rgba(53, 229, 255, 0.5);
+}
+
+.brick-brand h1 {
+  margin: 0;
+  font-size: clamp(19px, 5vw, 25px);
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.brick-brand h1 span {
+  color: var(--brick-red);
+}
+
+.brick-brand p {
+  margin: 5px 0 0;
+  color: var(--brick-muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+/* SCOREBOARD */
+
+.brick-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.brick-stat {
+  min-height: 69px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--brick-border);
+  border-radius: 15px;
+  background: linear-gradient(145deg, #1c1c30, #12121f);
+}
+
+.brick-stat span {
+  color: var(--brick-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.brick-stat strong {
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+#brickScoreValue {
+  color: var(--brick-cyan);
+}
+
+#brickBestValue {
+  color: #c49aff;
+}
+
+#brickLivesValue {
+  color: #ff6b86;
+}
+
+/* GAME AREA */
+
+.brick-game-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.brick-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(330px, 58vh, 570px);
+  min-height: 300px;
+  overflow: hidden;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 20px;
+  background: #090915;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.025),
+    0 16px 40px rgba(0, 0, 0, 0.28),
+    0 0 32px rgba(168, 85, 247, 0.08);
+  isolation: isolate;
+}
+
+#brickCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.brick-message {
+  min-height: 18px;
+  margin: 0;
+  text-align: center;
+  color: var(--brick-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* START AND PAUSE OVERLAYS */
+
+.brick-overlay {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(7, 7, 18, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.brick-overlay-card {
+  width: min(100%, 330px);
+  padding: 27px 22px;
+  text-align: center;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 22px;
+  background: linear-gradient(145deg, #202039, #121220);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.38);
+  animation: brickCardIn 0.35s ease both;
+}
+
+.brick-large-icon {
+  margin-bottom: 12px;
+  font-size: 45px;
+  line-height: 1.2;
+}
+
+.brick-eyebrow {
+  margin: 0 0 9px;
+  color: var(--brick-cyan);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.brick-overlay-card h2,
+.brick-modal-card h2 {
+  margin: 0 0 12px;
+  font-size: clamp(21px, 5vw, 28px);
+  font-weight: 950;
+  letter-spacing: 0.5px;
+}
+
+.brick-overlay-card > p:not(.brick-eyebrow) {
+  margin: 0 0 22px;
+  color: #b1b1cb;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* BUTTONS */
+
+.brick-primary-btn {
+  width: 100%;
+  min-height: 50px;
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(105deg, #a855f7, #ff416c);
+  box-shadow: 0 8px 22px rgba(168, 85, 247, 0.23);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.brick-primary-btn:hover {
+  filter: brightness(1.12);
+}
+
+.brick-primary-btn:active {
+  transform: scale(0.97);
+}
+
+.brick-controls {
+  display: grid;
+  grid-template-columns: 64px minmax(120px, 1fr) 64px;
+  align-items: center;
+  gap: 12px;
+}
+
+.brick-control-btn {
+  height: 58px;
+  border: 1px solid rgba(53, 229, 255, 0.2);
+  border-radius: 17px;
+  color: var(--brick-cyan);
+  background: linear-gradient(145deg, #202039, #151526);
+  font-size: 23px;
+  font-weight: 900;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.16);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.brick-control-btn:active {
+  background: rgba(53, 229, 255, 0.16);
+  transform: scale(0.96);
+}
+
+.brick-launch-btn {
+  height: 52px;
+  padding: 10px;
+  border: 1px solid rgba(255, 65, 108, 0.35);
+  border-radius: 15px;
+  color: white;
+  background: linear-gradient(110deg, #b82e69, #783ce0);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  box-shadow: 0 7px 20px rgba(184, 46, 105, 0.17);
+}
+
+.brick-launch-btn:active {
+  transform: scale(0.97);
+}
+
+.brick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.brick-secondary-btn {
+  min-height: 43px;
+  padding: 10px;
+  border: 1px solid var(--brick-border);
+  border-radius: 13px;
+  color: #d5d5ec;
+  background: var(--brick-panel);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+}
+
+.brick-secondary-btn:active {
+  background: var(--brick-panel-light);
+}
+
+.brick-tip {
+  margin: 0;
+  color: #8585a4;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.brick-footer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 5px;
+  color: #777792;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* GAME OVER MODAL */
+
+.brick-modal {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(4, 4, 13, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.brick-modal-card {
+  width: min(100%, 360px);
+  padding: 30px 24px;
+  text-align: center;
+  border: 1px solid rgba(168, 85, 247, 0.32);
+  border-radius: 24px;
+  background: linear-gradient(150deg, #22223c, #11111e);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+  animation: brickCardIn 0.3s ease both;
+}
+
+.brick-final-score {
+  margin: 22px 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid var(--brick-border);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.brick-final-score span {
+  color: var(--brick-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.brick-final-score strong {
+  color: var(--brick-cyan);
+  font-size: 38px;
+  font-weight: 950;
+  font-variant-numeric: tabular-nums;
+}
+
+.brick-home-link {
+  display: inline-block;
+  margin-top: 22px;
+  color: #b8a2ff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.brick-home-link:hover {
+  color: white;
+}
+
+/* ANIMATION AND SMALL SCREENS */
+
+@keyframes brickCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (min-width: 700px) {
+  .brick-app {
+    padding-top: 24px;
+    gap: 20px;
+  }
+
+  .brick-canvas-wrap {
+    height: min(58vh, 570px);
+  }
+
+  .brick-controls {
+    grid-template-columns: 78px minmax(160px, 1fr) 78px;
+  }
+
+  .brick-control-btn {
+    height: 62px;
+  }
+
+  .brick-launch-btn {
+    height: 56px;
+  }
+}
+
+@media (max-width: 380px) {
+  .brick-app {
+    padding-right: 11px;
+    padding-left: 11px;
+    gap: 13px;
+  }
+
+  .brick-header {
+    grid-template-columns: 40px 1fr 40px;
+    gap: 7px;
+  }
+
+  .brick-home-btn,
+  .brick-icon-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brick-brand {
+    gap: 6px;
+  }
+
+  .brick-brand h1 {
+    font-size: 18px;
+  }
+
+  .brick-brand p {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+  .brick-canvas-wrap {
+    height: 52vh;
+    min-height: 280px;
+  }
+
+  .brick-controls {
+    grid-template-columns: 56px minmax(90px, 1fr) 56px;
+    gap: 8px;
+  }
+
+  .brick-control-btn {
+    height: 52px;
+  }
+
+  .brick-launch-btn {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =====================================================
+   PART 12 END
+   FILE: devil-bricks/style.css
+   NEXT PART 13: devil-bricks/game.js
+===================================================== */
+  

@@ -1,0 +1,769 @@
+
+/* =====================================================
+   DEVIL GAMES
+   PART 15: DEVIL TIC TAC TOE — CSS DESIGN
+   FILE: devil-tic-tac-toe/style.css
+   NEXT: PART 16 — devil-tic-tac-toe/game.js
+===================================================== */
+
+:root {
+  --ttt-bg: #0b0b15;
+  --ttt-panel: #161629;
+  --ttt-panel-light: #22223b;
+  --ttt-text: #f7f7ff;
+  --ttt-muted: #9696b5;
+  --ttt-pink: #ff477e;
+  --ttt-purple: #a855f7;
+  --ttt-cyan: #39dfff;
+  --ttt-border: rgba(255, 255, 255, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  min-height: 100%;
+  background: var(--ttt-bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ttt-text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(168, 85, 247, 0.19), transparent 43%),
+    radial-gradient(ellipse at 100% 60%, rgba(255, 71, 126, 0.08), transparent 35%),
+    var(--ttt-bg);
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  color: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--ttt-cyan);
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.ttt-app {
+  width: min(100%, 620px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: max(15px, env(safe-area-inset-top)) 16px
+    max(22px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* HEADER */
+
+.ttt-header {
+  display: grid;
+  grid-template-columns: 43px minmax(0, 1fr) 43px;
+  align-items: center;
+  gap: 10px;
+}
+
+.ttt-home-btn,
+.ttt-icon-btn {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ttt-border);
+  border-radius: 14px;
+  background: var(--ttt-panel);
+  font-size: 23px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.ttt-home-btn:active,
+.ttt-icon-btn:active {
+  transform: scale(0.94);
+  background: var(--ttt-panel-light);
+}
+
+.ttt-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.ttt-brand-icon {
+  color: var(--ttt-pink);
+  font-size: 31px;
+  font-weight: 900;
+  text-shadow: 0 0 16px rgba(255, 71, 126, 0.45);
+}
+
+.ttt-brand h1 {
+  margin: 0;
+  font-size: clamp(16px, 4.5vw, 22px);
+  line-height: 1.15;
+  font-weight: 950;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.ttt-brand h1 span {
+  color: var(--ttt-pink);
+}
+
+.ttt-brand p {
+  margin: 4px 0 0;
+  color: var(--ttt-muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2.7px;
+}
+
+/* HERO */
+
+.ttt-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 24px 20px;
+  border: 1px solid rgba(168, 85, 247, 0.23);
+  border-radius: 23px;
+  background:
+    radial-gradient(circle at 86% 22%, rgba(255, 71, 126, 0.2), transparent 35%),
+    linear-gradient(135deg, #24203c, #151526 72%);
+}
+
+.ttt-hero-art {
+  position: absolute;
+  top: 14px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  opacity: 0.8;
+  transform: rotate(-9deg);
+  pointer-events: none;
+}
+
+.ttt-art-x {
+  color: var(--ttt-pink);
+  font-size: 25px;
+  font-weight: 950;
+  text-shadow: 0 0 15px rgba(255, 71, 126, 0.5);
+}
+
+.ttt-art-o {
+  color: var(--ttt-cyan);
+  font-size: 29px;
+  font-weight: 900;
+  text-shadow: 0 0 15px rgba(57, 223, 255, 0.4);
+}
+
+.ttt-eyebrow {
+  margin: 0 0 10px;
+  color: var(--ttt-cyan);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+}
+
+.ttt-hero h2 {
+  position: relative;
+  margin: 0;
+  font-size: clamp(22px, 6vw, 31px);
+  line-height: 1.2;
+  font-weight: 950;
+  letter-spacing: -0.5px;
+}
+
+.ttt-hero h2 span {
+  color: var(--ttt-pink);
+}
+
+.ttt-hero-copy {
+  margin: 11px 0 0;
+  color: #b8b8d0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* GAME MODE */
+
+.ttt-mode-panel,
+.ttt-game-panel,
+.ttt-score-panel {
+  padding: 17px;
+  border: 1px solid var(--ttt-border);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #19192d, #12121f);
+}
+
+.ttt-section-label {
+  margin: 0 0 13px;
+  color: var(--ttt-muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.8px;
+}
+
+.ttt-mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ttt-mode-btn {
+  min-width: 0;
+  min-height: 116px;
+  padding: 13px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--ttt-border);
+  border-radius: 15px;
+  background: #151526;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.ttt-mode-btn:active {
+  transform: scale(0.98);
+}
+
+.ttt-mode-btn.active {
+  border-color: rgba(168, 85, 247, 0.8);
+  background: linear-gradient(145deg, rgba(168, 85, 247, 0.18), rgba(255, 71, 126, 0.07));
+  box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.1);
+}
+
+.ttt-mode-icon {
+  font-size: 26px;
+}
+
+.ttt-mode-title {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.ttt-mode-subtitle {
+  color: var(--ttt-muted);
+  font-size: 10px;
+}
+
+.ttt-difficulty-wrap {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ttt-difficulty-wrap label {
+  color: var(--ttt-muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.ttt-difficulty-wrap select {
+  min-width: 115px;
+  padding: 9px 11px;
+  border: 1px solid var(--ttt-border);
+  border-radius: 10px;
+  color: var(--ttt-text);
+  background: var(--ttt-panel-light);
+  font-size: 12px;
+}
+
+/* GAME BOARD */
+
+.ttt-game-panel {
+  padding: 18px;
+}
+
+.ttt-match-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.ttt-player {
+  min-width: 0;
+  padding: 10px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.ttt-player.active {
+  border-color: rgba(168, 85, 247, 0.45);
+  background: rgba(168, 85, 247, 0.1);
+}
+
+.ttt-player-symbol {
+  flex-shrink: 0;
+  font-size: 25px;
+  font-weight: 950;
+}
+
+.ttt-x {
+  color: var(--ttt-pink);
+}
+
+.ttt-o {
+  color: var(--ttt-cyan);
+}
+
+.ttt-player strong,
+.ttt-player small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ttt-player strong {
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.ttt-player small {
+  margin-top: 5px;
+  color: var(--ttt-muted);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.ttt-vs {
+  color: #777791;
+  font-size: 10px;
+  font-weight: 950;
+}
+
+.ttt-status-bar {
+  min-height: 43px;
+  margin: 16px 0;
+  padding: 10px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid var(--ttt-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  color: #d8d8ec;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-align: center;
+}
+
+#tttStatusDot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--ttt-pink);
+  box-shadow: 0 0 10px rgba(255, 71, 126, 0.6);
+}
+
+.ttt-board {
+  width: min(100%, 370px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 19px;
+  background: linear-gradient(145deg, #211b38, #111120);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.ttt-cell {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 13px;
+  color: white;
+  background: linear-gradient(145deg, #25253d, #1a1a2d);
+  font-size: clamp(42px, 12vw, 67px);
+  font-weight: 900;
+  line-height: 1;
+  transition: background 0.18s, transform 0.18s, border-color 0.18s;
+}
+
+.ttt-cell:not(:disabled):active {
+  transform: scale(0.95);
+  background: #30304b;
+}
+
+.ttt-cell:disabled {
+  cursor: default;
+}
+
+.ttt-cell.mark-x {
+  color: var(--ttt-pink);
+  text-shadow: 0 0 18px rgba(255, 71, 126, 0.28);
+}
+
+.ttt-cell.mark-o {
+  color: var(--ttt-cyan);
+  text-shadow: 0 0 18px rgba(57, 223, 255, 0.24);
+}
+
+.ttt-cell.winning-cell {
+  border-color: var(--ttt-cyan);
+  background: rgba(57, 223, 255, 0.14);
+  box-shadow: inset 0 0 20px rgba(57, 223, 255, 0.1);
+  animation: tttWinPulse 0.8s ease-in-out infinite alternate;
+}
+
+.ttt-game-actions {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  gap: 10px;
+}
+
+.ttt-primary-btn,
+.ttt-secondary-btn {
+  min-height: 45px;
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.ttt-primary-btn {
+  border: 0;
+  color: white;
+  background: linear-gradient(105deg, #a855f7, #ff477e);
+  box-shadow: 0 7px 18px rgba(168, 85, 247, 0.16);
+}
+
+.ttt-secondary-btn {
+  border: 1px solid var(--ttt-border);
+  color: #d6d6eb;
+  background: var(--ttt-panel-light);
+}
+
+.ttt-primary-btn:active,
+.ttt-secondary-btn:active {
+  transform: scale(0.97);
+}
+
+.ttt-primary-btn:hover {
+  filter: brightness(1.1);
+}
+
+/* SCORE PANEL */
+
+.ttt-score-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.ttt-score-panel > div {
+  min-width: 0;
+  padding: 13px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--ttt-border);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.ttt-score-icon {
+  font-size: 22px;
+}
+
+.ttt-score-label {
+  color: var(--ttt-muted);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+  text-align: center;
+}
+
+.ttt-score-panel strong {
+  color: var(--ttt-cyan);
+  font-size: 24px;
+  font-weight: 950;
+  font-variant-numeric: tabular-nums;
+}
+
+.ttt-bottom-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ttt-footer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 3px;
+  color: #777792;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* MODALS */
+
+.ttt-modal {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 4, 13, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ttt-modal-card {
+  position: relative;
+  width: min(100%, 360px);
+  padding: 28px 23px;
+  border: 1px solid rgba(168, 85, 247, 0.32);
+  border-radius: 23px;
+  background: linear-gradient(150deg, #24243e, #12121f);
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+  animation: tttModalIn 0.25s ease both;
+}
+
+.ttt-result-icon {
+  margin-bottom: 12px;
+  font-size: 48px;
+}
+
+.ttt-modal-card h2 {
+  margin: 0 0 10px;
+  font-size: 27px;
+  font-weight: 950;
+}
+
+.ttt-modal-card > p:not(.ttt-eyebrow) {
+  margin: 0 0 22px;
+  color: #b7b7d0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ttt-modal-card .ttt-secondary-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.ttt-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--ttt-border);
+  border-radius: 10px;
+  background: var(--ttt-panel-light);
+  font-size: 15px;
+}
+
+.ttt-settings-card {
+  text-align: left;
+}
+
+.ttt-settings-card .ttt-eyebrow,
+.ttt-settings-card h2 {
+  text-align: center;
+}
+
+.ttt-setting-row {
+  min-height: 51px;
+  margin-top: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--ttt-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  color: #e2e2f2;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ttt-setting-row input {
+  width: 19px;
+  height: 19px;
+  accent-color: var(--ttt-purple);
+}
+
+.ttt-settings-card > .ttt-primary-btn {
+  width: 100%;
+  margin-top: 18px;
+}
+
+/* ANIMATIONS */
+
+@keyframes tttModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes tttWinPulse {
+  from {
+    box-shadow: inset 0 0 8px rgba(57, 223, 255, 0.05);
+  }
+  to {
+    box-shadow: inset 0 0 22px rgba(57, 223, 255, 0.22);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (min-width: 700px) {
+  .ttt-app {
+    padding-top: 24px;
+    gap: 22px;
+  }
+
+  .ttt-hero {
+    padding: 30px 27px;
+  }
+
+  .ttt-game-panel {
+    padding: 22px;
+  }
+
+  .ttt-cell {
+    font-size: 65px;
+  }
+}
+
+@media (max-width: 380px) {
+  .ttt-app {
+    padding-right: 11px;
+    padding-left: 11px;
+    gap: 14px;
+  }
+
+  .ttt-brand {
+    gap: 5px;
+  }
+
+  .ttt-brand h1 {
+    font-size: 15px;
+  }
+
+  .ttt-brand p {
+    font-size: 8px;
+    letter-spacing: 1.8px;
+  }
+
+  .ttt-hero {
+    padding: 20px 15px;
+  }
+
+  .ttt-mode-panel,
+  .ttt-game-panel,
+  .ttt-score-panel {
+    padding: 13px;
+  }
+
+  .ttt-player {
+    padding: 8px 5px;
+    gap: 5px;
+  }
+
+  .ttt-player-symbol {
+    font-size: 21px;
+  }
+
+  .ttt-player strong {
+    font-size: 9px;
+  }
+
+  .ttt-board {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .ttt-cell {
+    border-radius: 10px;
+    font-size: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =====================================================
+   PART 15 END
+   FILE: devil-tic-tac-toe/style.css
+   NEXT PART 16: devil-tic-tac-toe/game.js
+===================================================== */
+  

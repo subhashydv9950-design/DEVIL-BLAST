@@ -601,6 +601,81 @@
    NEXT: PART 08 — DEVIL RUN HTML
 ===================================================== */
 
+/* =====================================================
+   DEVIL GAMES — PART 07
+   FILE: devil-blast/game.js
+   PURPOSE: MOBILE DRAG-AND-DROP IMPROVEMENTS
+   NOTE: ADD BEFORE THE PART 06 END COMMENT
+   NEXT: PART 08 — DEVIL RUN HTML
+===================================================== */
+
+(() => {
+  const board = document.getElementById("gameBoard");
+  const tray = document.getElementById("blockTray");
+
+  if (!board || !tray) return;
+
+  let dragSlot = null;
+  let dragPointerId = null;
+
+  tray.querySelectorAll(".block-slot").forEach((slot) => {
+    slot.addEventListener("pointerdown", (event) => {
+      if (slot.disabled) return;
+
+      dragSlot = slot;
+      dragPointerId = event.pointerId;
+
+      slot.classList.add("dragging");
+
+      try {
+        slot.setPointerCapture(event.pointerId);
+      } catch (_) {
+        // Pointer capture may not be supported by every browser.
+      }
+    });
+
+    slot.addEventListener("pointerup", (event) => {
+      if (dragSlot !== slot || dragPointerId !== event.pointerId) return;
+
+      slot.classList.remove("dragging");
+
+      const target = document.elementFromPoint(
+        event.clientX,
+        event.clientY
+      );
+
+      const cell = target?.closest(".board-cell");
+
+      if (cell && !cell.closest("#blockTray")) {
+        cell.click();
+      } else {
+        slot.click();
+      }
+
+      dragSlot = null;
+      dragPointerId = null;
+    });
+
+    slot.addEventListener("pointercancel", () => {
+      slot.classList.remove("dragging");
+      dragSlot = null;
+      dragPointerId = null;
+    });
+  });
+
+  document.addEventListener("contextmenu", (event) => {
+    if (event.target.closest("#gameBoard, #blockTray")) {
+      event.preventDefault();
+    }
+  });
+})();
+
+/* =====================================================
+   PART 07 END
+   FILE: devil-blast/game.js
+   NEXT: PART 08 — DEVIL RUN HTML
+===================================================== */
+
 
 /* =====================================================
    PART 06 END

@@ -1,0 +1,160 @@
+
+<!-- =====================================================
+DEVIL GAMES — PART 08
+FILE: devil-run/index.html
+PURPOSE: ENDLESS RUNNER GAME SCREEN
+FEATURES: SCORE, COINS, JUMP, SLIDE, PAUSE, RESTART
+NEXT: PART 09 — devil-run/style.css
+===================================================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101426">
+  <meta name="description" content="DEVIL RUN endless runner game">
+  <title>DEVIL RUN | DEVIL GAMES</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="runner-shell">
+
+    <!-- HEADER -->
+    <header class="runner-header">
+      <a href="../index.html" class="runner-icon" aria-label="Back to games">⌂</a>
+
+      <div class="runner-brand">
+        <span class="runner-logo">⚡</span>
+        <div>
+          <h1>DEVIL <span>RUN</span></h1>
+          <p>ENDLESS RUNNER</p>
+        </div>
+      </div>
+
+      <button class="runner-icon" id="pauseBtn" aria-label="Pause">Ⅱ</button>
+    </header>
+
+    <!-- SCORE -->
+    <section class="runner-stats">
+      <div class="runner-stat">
+        <span>DISTANCE</span>
+        <strong id="distanceValue">0 m</strong>
+      </div>
+      <div class="runner-stat">
+        <span>COINS</span>
+        <strong id="coinValue">🪙 0</strong>
+      </div>
+      <div class="runner-stat">
+        <span>BEST</span>
+        <strong id="bestValue">0 m</strong>
+      </div>
+    </section>
+
+    <!-- GAME WORLD -->
+    <section class="runner-world" id="runnerWorld">
+      <div class="world-sky"></div>
+      <div class="moon"></div>
+
+      <div class="mountain mountain-back"></div>
+      <div class="mountain mountain-front"></div>
+
+      <div class="world-sign">DEVIL CITY</div>
+
+      <div class="world-track" id="worldTrack">
+        <div class="track-line"></div>
+        <div class="track-line track-line-two"></div>
+      </div>
+
+      <div class="runner-player" id="runnerPlayer" aria-label="Runner">
+        <div class="player-shadow"></div>
+        <div class="player-body">
+          <div class="player-hair"></div>
+          <div class="player-face"></div>
+          <div class="player-shirt"></div>
+          <div class="player-arm arm-left"></div>
+          <div class="player-arm arm-right"></div>
+          <div class="player-leg leg-left"></div>
+          <div class="player-leg leg-right"></div>
+        </div>
+      </div>
+
+      <div class="runner-obstacles" id="obstacleLayer"></div>
+      <div class="runner-coins" id="coinLayer"></div>
+
+      <div class="runner-hud-message" id="runnerMessage">
+        <span class="hud-bolt">⚡</span>
+        <strong>READY TO RUN?</strong>
+        <p>Collect coins. Avoid obstacles.</p>
+        <button id="startBtn" class="runner-primary">START RUN</button>
+      </div>
+
+      <div class="runner-paused hidden" id="pauseOverlay">
+        <strong>PAUSED</strong>
+        <p>Catch your breath!</p>
+        <button id="resumeBtn" class="runner-primary">RESUME</button>
+      </div>
+    </section>
+
+    <!-- CONTROLS -->
+    <section class="runner-controls">
+      <div class="control-instructions">
+        <strong>HOW TO PLAY</strong>
+        <p>Swipe up to jump · Swipe down to slide</p>
+        <p>Use the buttons if you prefer touch controls.</p>
+      </div>
+
+      <div class="control-buttons">
+        <button id="jumpBtn" class="control-button jump-button">
+          <span>↑</span>
+          <small>JUMP</small>
+        </button>
+        <button id="slideBtn" class="control-button slide-button">
+          <span>↓</span>
+          <small>SLIDE</small>
+        </button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="runner-footer">
+      <span>DEVIL GAMES</span>
+      <button id="soundBtn" class="runner-sound">♫ SOUND ON</button>
+      <button id="restartBtn" class="runner-restart">↻ RESTART</button>
+    </footer>
+
+  </main>
+
+  <!-- GAME OVER MODAL -->
+  <div class="runner-modal hidden" id="gameOverModal" role="dialog" aria-modal="true">
+    <div class="runner-modal-card">
+      <div class="game-over-icon">⚡</div>
+      <p class="game-over-label">RUN COMPLETE</p>
+      <h2>GAME OVER</h2>
+      <p class="game-over-description">Every run makes you stronger.</p>
+
+      <div class="final-stats">
+        <div>
+          <span>DISTANCE</span>
+          <strong id="finalDistance">0 m</strong>
+        </div>
+        <div>
+          <span>COINS</span>
+          <strong id="finalCoins">0</strong>
+        </div>
+      </div>
+
+      <button id="playAgainBtn" class="runner-primary">RUN AGAIN</button>
+      <a href="../index.html" class="runner-home-link">BACK TO DEVIL GAMES</a>
+    </div>
+  </div>
+
+  <!-- =====================================================
+  PART 08 END
+  FILE: devil-run/index.html
+  NEXT: PART 09 — devil-run/style.css
+  ===================================================== -->
+
+  <script src="game.js"></script>
+</body>
+</html>

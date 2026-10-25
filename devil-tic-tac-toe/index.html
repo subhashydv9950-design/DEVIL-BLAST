@@ -1,0 +1,205 @@
+
+<!-- =====================================================
+     DEVIL GAMES
+     PART 14: DEVIL TIC TAC TOE — HTML
+     FILE: devil-tic-tac-toe/index.html
+     NEXT: PART 15 — devil-tic-tac-toe/style.css
+===================================================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#10101c">
+  <meta name="description" content="DEVIL TIC TAC TOE — challenge a friend or play against AI.">
+  <title>DEVIL TIC TAC TOE | DEVIL GAMES</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="ttt-app">
+
+    <header class="ttt-header">
+      <a class="ttt-home-btn" href="../index.html" aria-label="Back to games">⌂</a>
+
+      <div class="ttt-brand">
+        <span class="ttt-brand-icon">✕</span>
+        <div>
+          <h1>DEVIL <span>TIC TAC TOE</span></h1>
+          <p>THE MIND BATTLE</p>
+        </div>
+      </div>
+
+      <button id="tttSettingsBtn" class="ttt-icon-btn"
+        type="button" aria-label="Game settings">⚙</button>
+    </header>
+
+    <section class="ttt-hero">
+      <div class="ttt-hero-art" aria-hidden="true">
+        <span class="ttt-art-x">✕</span>
+        <span class="ttt-art-o">○</span>
+        <span class="ttt-art-x">✕</span>
+      </div>
+      <p class="ttt-eyebrow">THINK • PLAN • WIN</p>
+      <h2>YOUR NEXT MOVE<br><span>CHANGES EVERYTHING</span></h2>
+      <p class="ttt-hero-copy">A classic game. A devilish challenge.</p>
+    </section>
+
+    <section class="ttt-mode-panel">
+      <p class="ttt-section-label">CHOOSE GAME MODE</p>
+
+      <div class="ttt-mode-grid">
+        <button class="ttt-mode-btn active" data-mode="ai" type="button">
+          <span class="ttt-mode-icon">🤖</span>
+          <span class="ttt-mode-title">VS COMPUTER</span>
+          <span class="ttt-mode-subtitle">Challenge the AI</span>
+        </button>
+
+        <button class="ttt-mode-btn" data-mode="local" type="button">
+          <span class="ttt-mode-icon">👥</span>
+          <span class="ttt-mode-title">2 PLAYERS</span>
+          <span class="ttt-mode-subtitle">Play with a friend</span>
+        </button>
+      </div>
+
+      <div id="tttDifficultyWrap" class="ttt-difficulty-wrap">
+        <label for="tttDifficulty">AI DIFFICULTY</label>
+        <select id="tttDifficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="ttt-game-panel">
+      <div class="ttt-match-info">
+        <div class="ttt-player active" id="tttPlayerX">
+          <span class="ttt-player-symbol ttt-x">✕</span>
+          <div>
+            <strong id="tttNameX">PLAYER X</strong>
+            <small id="tttScoreX">WINS: 0</small>
+          </div>
+        </div>
+
+        <div class="ttt-vs">VS</div>
+
+        <div class="ttt-player" id="tttPlayerO">
+          <span class="ttt-player-symbol ttt-o">○</span>
+          <div>
+            <strong id="tttNameO">DEVIL AI</strong>
+            <small id="tttScoreO">WINS: 0</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="ttt-status-bar" aria-live="polite">
+        <span id="tttStatusDot"></span>
+        <span id="tttStatus">PLAYER X'S TURN</span>
+      </div>
+
+      <div id="tttBoard" class="ttt-board" role="group"
+        aria-label="Tic tac toe board">
+        <button class="ttt-cell" data-cell="0" type="button" aria-label="Cell 1"></button>
+        <button class="ttt-cell" data-cell="1" type="button" aria-label="Cell 2"></button>
+        <button class="ttt-cell" data-cell="2" type="button" aria-label="Cell 3"></button>
+        <button class="ttt-cell" data-cell="3" type="button" aria-label="Cell 4"></button>
+        <button class="ttt-cell" data-cell="4" type="button" aria-label="Cell 5"></button>
+        <button class="ttt-cell" data-cell="5" type="button" aria-label="Cell 6"></button>
+        <button class="ttt-cell" data-cell="6" type="button" aria-label="Cell 7"></button>
+        <button class="ttt-cell" data-cell="7" type="button" aria-label="Cell 8"></button>
+        <button class="ttt-cell" data-cell="8" type="button" aria-label="Cell 9"></button>
+      </div>
+
+      <div class="ttt-game-actions">
+        <button id="tttUndoBtn" class="ttt-secondary-btn" type="button">
+          ↶ UNDO
+        </button>
+        <button id="tttRestartBtn" class="ttt-primary-btn" type="button">
+          ↻ NEW ROUND
+        </button>
+      </div>
+    </section>
+
+    <section class="ttt-score-panel">
+      <div>
+        <span class="ttt-score-icon">🏆</span>
+        <span class="ttt-score-label">YOUR WINS</span>
+        <strong id="tttTotalWins">0</strong>
+      </div>
+      <div>
+        <span class="ttt-score-icon">🤝</span>
+        <span class="ttt-score-label">DRAWS</span>
+        <strong id="tttDraws">0</strong>
+      </div>
+      <div>
+        <span class="ttt-score-icon">🔥</span>
+        <span class="ttt-score-label">WIN STREAK</span>
+        <strong id="tttStreak">0</strong>
+      </div>
+    </section>
+
+    <section class="ttt-bottom-actions">
+      <button id="tttSoundBtn" class="ttt-secondary-btn" type="button">
+        🔊 SOUND ON
+      </button>
+      <button id="tttResetStatsBtn" class="ttt-secondary-btn" type="button">
+        RESET STATS
+      </button>
+    </section>
+
+    <footer class="ttt-footer">
+      <span>DEVIL GAMES</span>
+      <span>•</span>
+      <span>PLAY SMART</span>
+    </footer>
+  </main>
+
+  <div id="tttResultModal" class="ttt-modal" hidden>
+    <div class="ttt-modal-card">
+      <div id="tttResultIcon" class="ttt-result-icon">🏆</div>
+      <p class="ttt-eyebrow">ROUND FINISHED</p>
+      <h2 id="tttResultTitle">YOU WIN!</h2>
+      <p id="tttResultText">Excellent move!</p>
+
+      <button id="tttPlayAgainBtn" class="ttt-primary-btn" type="button">
+        ↻ PLAY AGAIN
+      </button>
+
+      <button id="tttCloseResultBtn" class="ttt-secondary-btn" type="button">
+        VIEW BOARD
+      </button>
+    </div>
+  </div>
+
+  <div id="tttSettingsModal" class="ttt-modal" hidden>
+    <div class="ttt-modal-card ttt-settings-card">
+      <button id="tttCloseSettingsBtn" class="ttt-modal-close"
+        type="button" aria-label="Close settings">✕</button>
+
+      <p class="ttt-eyebrow">PERSONALIZE YOUR GAME</p>
+      <h2>GAME SETTINGS</h2>
+
+      <label class="ttt-setting-row">
+        <span>Sound effects</span>
+        <input id="tttSoundToggle" type="checkbox" checked>
+      </label>
+
+      <label class="ttt-setting-row">
+        <span>Vibration</span>
+        <input id="tttVibrationToggle" type="checkbox">
+      </label>
+
+      <button id="tttSettingsDoneBtn" class="ttt-primary-btn" type="button">
+        DONE
+      </button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
+<!-- =====================================================
+     PART 14 END
+     FILE: devil-tic-tac-toe/index.html
+     NEXT PART 15: devil-tic-tac-toe/style.css
+===================================================== -->

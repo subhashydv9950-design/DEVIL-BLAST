@@ -1,0 +1,152 @@
+<!-- =====================================================
+DEVIL GAMES — PART 04
+FILE: devil-blast/index.html
+PURPOSE: DEVIL BLAST 8x8 BLOCK PUZZLE GAME SCREEN
+NEXT: PART 05 — devil-blast/style.css
+===================================================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#140d20">
+  <meta name="description" content="DEVIL BLAST colorful block puzzle game">
+  <title>DEVIL BLAST | DEVIL GAMES</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-shell">
+
+    <!-- TOP BAR -->
+    <header class="game-header">
+      <a class="icon-btn home-btn" href="../index.html" aria-label="Home">⌂</a>
+
+      <div class="game-brand">
+        <span class="brand-mark">◆</span>
+        <div>
+          <h1>DEVIL <span>BLAST</span></h1>
+          <p>BLOCK PUZZLE</p>
+        </div>
+      </div>
+
+      <button class="icon-btn" id="pauseBtn" aria-label="Pause game">Ⅱ</button>
+    </header>
+
+    <!-- SCORE PANEL -->
+    <section class="score-panel">
+      <div class="score-box">
+        <span class="score-label">SCORE</span>
+        <strong id="scoreValue">0</strong>
+      </div>
+
+      <div class="score-box score-main">
+        <span class="score-label">BEST SCORE</span>
+        <strong id="bestValue">0</strong>
+      </div>
+
+      <div class="score-box">
+        <span class="score-label">CLEARED</span>
+        <strong id="clearValue">0</strong>
+      </div>
+    </section>
+
+    <!-- GAME MESSAGE -->
+    <section class="game-message">
+      <div class="message-icon">✦</div>
+      <div>
+        <h2 id="messageTitle">Ready to Blast?</h2>
+        <p id="messageText">Place blocks and complete full rows or columns.</p>
+      </div>
+    </section>
+
+    <!-- PUZZLE BOARD -->
+    <main class="board-area">
+      <div class="board-frame">
+        <div
+          class="puzzle-board"
+          id="gameBoard"
+          role="grid"
+          aria-label="8 by 8 block puzzle board"
+        ></div>
+      </div>
+    </main>
+
+    <!-- BLOCK TRAY -->
+    <section class="block-section">
+      <div class="section-heading">
+        <div>
+          <h2>YOUR BLOCKS</h2>
+          <p>Tap a shape, then tap the board</p>
+        </div>
+        <span class="tray-badge" id="blocksLeft">3 BLOCKS</span>
+      </div>
+
+      <div class="block-tray" id="blockTray">
+        <button class="block-slot" data-slot="0" aria-label="Select block 1">
+          <span class="block-shape"></span>
+        </button>
+
+        <button class="block-slot" data-slot="1" aria-label="Select block 2">
+          <span class="block-shape"></span>
+        </button>
+
+        <button class="block-slot" data-slot="2" aria-label="Select block 3">
+          <span class="block-shape"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- GAME ACTIONS -->
+    <section class="game-actions">
+      <button class="action-btn secondary-action" id="soundBtn">
+        <span>♫</span>
+        <small>SOUND</small>
+      </button>
+
+      <button class="action-btn hint-action" id="hintBtn">
+        <span>✦</span>
+        <small>HINT</small>
+      </button>
+
+      <button class="action-btn restart-action" id="restartBtn">
+        <span>↻</span>
+        <small>RESTART</small>
+      </button>
+    </section>
+
+    <footer class="game-footer">
+      <span>DEVIL GAMES</span>
+      <span>BUILD YOUR BEST SCORE</span>
+    </footer>
+  </div>
+
+  <!-- PAUSE / GAME OVER MODAL -->
+  <div class="game-modal hidden" id="gameModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-symbol" id="modalSymbol">Ⅱ</div>
+      <h2 id="modalTitle">Game Paused</h2>
+      <p id="modalText">Take a breath. Your blocks are waiting.</p>
+
+      <div class="modal-score hidden" id="finalScoreBox">
+        <span>FINAL SCORE</span>
+        <strong id="finalScore">0</strong>
+      </div>
+
+      <button class="modal-primary" id="resumeBtn">RESUME GAME</button>
+      <button class="modal-secondary" id="modalRestartBtn">RESTART GAME</button>
+      <a class="modal-home" href="../index.html">BACK TO DEVIL GAMES</a>
+    </div>
+  </div>
+
+  <!-- =====================================================
+  PART 04 END
+  FILE: devil-blast/index.html
+  NEXT: PART 05 — devil-blast/style.css
+  ===================================================== -->
+
+  <script src="game.js"></script>
+</body>
+</html>
+
